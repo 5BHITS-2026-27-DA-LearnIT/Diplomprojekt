@@ -1,0 +1,73 @@
+# ============================================
+# Lokale Notizen / KI
+# ============================================
+RulesforKi.md
+CLAUDE.md
+.claude/
+
+# ============================================
+# Umgebungsvariablen / Geheimnisse
+# ============================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.crt
+
+# ============================================
+# Python / Django
+# ============================================
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+db.sqlite3
+db.sqlite3-journal
+staticfiles/
+media/
+*.log
+
+# ============================================
+# Node / React / Vite
+# ============================================
+node_modules/
+dist/
+build/
+.vite/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+playwright-report/
+test-results/
+
+# ============================================
+# Docker / Datenbank / Backups
+# ============================================
+*.dump
+*.sql.gz
+backups/
+
+# ============================================
+# Editor / IDE
+# ============================================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+
+# ============================================
+# Betriebssystem
+# ============================================
+.DS_Store
+Thumbs.db
+desktop.ini
