@@ -10,22 +10,42 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+import os
 from pathlib import Path
+
+from django.core.exceptions import ImproperlyConfigured
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
+# Konfiguration über Umgebungsvariablen (Twelve-Factor, Issue #10).
+# Werte kommen aus der Umgebung: in Docker setzt docker compose sie aus der
+# .env-Datei, lokal werden sie in der Shell gesetzt (siehe .env.example).
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qgrhue*xyr*$*jvb)(75!my9%dvyl49s8wh&bxz#e9j!9%bds)'
+def env(name, default=None):
+    """Liest eine Umgebungsvariable. Ohne Default ist sie Pflicht."""
+    value = os.environ.get(name, default)
+    if value is None or value == '':
+        raise ImproperlyConfigured(f'Umgebungsvariable {name} fehlt.')
+    return value
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = []
+def env_bool(name, default='False'):
+    return env(name, default).strip().lower() in ('1', 'true', 'yes', 'on')
+
+
+def env_list(name, default=''):
+    return [item.strip() for item in os.environ.get(name, default).split(',') if item.strip()]
+
+
+SECRET_KEY = env('DJANGO_SECRET_KEY')
+
+# Standard ist False, damit DEBUG in Produktion nie versehentlich an ist.
+DEBUG = env_bool('DJANGO_DEBUG')
+
+ALLOWED_HOSTS = env_list('DJANGO_ALLOWED_HOSTS')
 
 
 # Application definition
@@ -87,12 +107,28 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# PostgreSQL, sobald POSTGRES_DB gesetzt ist (Docker/Server).
+# Die Variablennamen sind dieselben wie beim offiziellen postgres-Image,
+# damit Datenbank- und Django-Container dieselbe .env nutzen können.
+# Ohne POSTGRES_DB: SQLite-Datei, nur für die lokale Entwicklung.
+if os.environ.get('POSTGRES_DB'):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env('POSTGRES_DB'),
+            'USER': env('POSTGRES_USER'),
+            'PASSWORD': env('POSTGRES_PASSWORD'),
+            'HOST': env('POSTGRES_HOST', 'db'),
+            'PORT': env('POSTGRES_PORT', '5432'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 
 # Password validation
