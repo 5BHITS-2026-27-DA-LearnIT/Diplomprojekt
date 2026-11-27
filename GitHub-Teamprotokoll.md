@@ -29,20 +29,20 @@ Notizen: ____________________________________________
 *Zuständig: Luca (Lead), Jakob. Sollte laut Kapiteln am 15.11. stehen.*
 
 Endpunkte für den Meilenstein (ankreuzen, was dazugehört):
-- [ ] Login / Logout
-- [ ] Aktueller Benutzer
-- [ ] Liste der Lerninhalte
-- [ ] Lernkarten eines Lerninhalts
-- [ ] Fällige Karten
-- [ ] Bewertung einer Karte abschicken
+- [x] Login / Logout
+- [x] Aktueller Benutzer
+- [x] Liste der Lerninhalte
+- [x] Lernkarten eines Lerninhalts
+- [x] Fällige Karten
+- [x] Bewertung einer Karte abschicken
 - [ ] Weitere: ______________
 
 Fehlerformat:
-- [ ] Standardformat von Django REST Framework (`{"detail": "..."}` bzw. Fehler pro Feld)
+- [x] Standardformat von Django REST Framework (`{"detail": "..."}` bzw. Fehler pro Feld)
 - [ ] Eigenes einheitliches Format: ______________
 
 Wo wird der Vertrag abgelegt?
-- [ ] Automatisch erzeugtes OpenAPI-Schema (#15), Jakob erzeugt daraus die TypeScript-Typen (#23)
+- [x] Automatisch erzeugtes OpenAPI-Schema (#15), Jakob erzeugt daraus die TypeScript-Typen (#23)
 - [ ] Zusätzlich eine kurze Doku im Repo
 
 Notizen: ____________________________________________
@@ -52,7 +52,7 @@ Notizen: ____________________________________________
 ## #3 Algorithmus für Lernkarten
 *Zuständig: Luca, Jai, Abstimmung mit Jakob. Legt fest, wie viele Bewertungsbuttons das Frontend hat.*
 
-- [ ] **SM-2** für den Meilenstein (Bewertung 0–5), FSRS später prüfen (Empfehlung)
+- [x] **SM-2** für den Meilenstein (Bewertung 0–5),
 - [ ] **FSRS** gleich von Anfang an (4 Stufen), Version: ______________
 
 Buttons im Frontend:
@@ -68,21 +68,21 @@ Notizen: ____________________________________________
 
 Bekommen Testaufgaben auch einen Wiederholungsstatus?
 - [ ] Ja
-- [ ] Nein, nur Lernkarten
+- [x] Nein, nur Lernkarten
 
 Lernergebnis:
 - [ ] Ein gemeinsames Modell für Lernkarte und Testaufgabe
-- [ ] Zwei getrennte Modelle
+- [x] Zwei getrennte Modelle
 
 Gamification-Daten (Punkte, Level, Abzeichen, Streak):
 - [ ] Werden im Backend gespeichert
 - [ ] Werden aus vorhandenen Daten berechnet
-- [ ] Vorerst keine Gamification
+- [x] Vorerst keine Gamification
 
 Was passiert, wenn ein Benutzer gelöscht wird?
 - [ ] Seine Daten werden mitgelöscht
 - [ ] Seine Daten werden anonymisiert
-- [ ] Erst nach Rücksprache mit Betreuern (#7)
+- [x] Erst nach Rücksprache mit Betreuern (#7)
 
 Notizen: ____________________________________________
 
@@ -93,7 +93,7 @@ Notizen: ____________________________________________
 
 - [ ] Keine Ranglisten (zumindest am Anfang)
 - [ ] Ranglisten nur mit Zustimmung der Schüler
-- [ ] Ranglisten ohne Namen (anonym)
+- [x] Ranglisten ohne Namen (anonym)
 
 Notizen: ____________________________________________
 
