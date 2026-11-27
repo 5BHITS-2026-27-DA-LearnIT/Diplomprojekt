@@ -1,100 +1,147 @@
-# Protokoll: GitHub-Teamfunktionen
+# Besprechungsprotokoll: Offene Team-Issues
 
 **Projekt:** LearnIT – Diplomarbeit 5BHITS 2026/27
+**Issues:** Repo `Diplomarbeit`, alle offenen Issues mit mehreren Zuständigen
 
 Datum: ______________
 
-Anwesend: ☐ Luca ☐ Jakob ☐ Jai ☐ Betreuer: ______________
+Anwesend: [ ] Luca  [ ] Jakob  [ ] Jai  [ ] Betreuer: ______________
 
 Ankreuzen: `[ ]` zu `[x]` ändern.
 
 ---
 
-## 1. Rechte und Teams
+## #5 Auslieferung Frontend/API: gleiche Adresse oder getrennt?
+*Zuständig: Jai, Luca, Jakob. Hängt mit #24 (Build/Deployment) zusammen.*
 
-**1.1 Rechte der Schüler**
-- [ ] Alle drei sind Owner
-- [ ] Einer ist Owner, die anderen sind Member
+- [ ] **Gleiche Adresse:** nginx liefert das Frontend und `/api` unter einer Domain aus. Login über Session + CSRF, kein CORS nötig (Empfehlung).
+- [ ] **Getrennte Adressen:** Login über Token, CORS muss eingerichtet werden.
 
-**1.2 Teams**
-- [ ] Keine Teams
-- [ ] Team `entwickler` (Luca, Jakob, Jai) mit Schreibrechten auf beide Repos
-- [ ] Zusätzlich Team `betreuer` mit Leserechten
+Frontend wird ausgeliefert als:
+- [ ] Statischer Build, den nginx ausliefert
+- [ ] Eigener Container mit Node-Server
 
----
-
-## 2. Branches
-
-**2.1 Schutz von `main`** (zurzeit nicht geschützt)
-- [ ] Änderungen nur über Pull Request, kein Force-Push, nicht löschbar
-- [ ] Kein Schutz
-
-**2.2 Branch-Namen**
-- [ ] `<issue-nr>-<kurzbeschreibung>` (z. B. `12-login-api`)
-- [ ] `feature/…`, `fix/…`, `docs/…`
-- [ ] Keine Vorgabe
+Notizen: ____________________________________________
 
 ---
 
-## 3. Pull Requests
+## #2 API-Vertrag festlegen
+*Zuständig: Luca (Lead), Jakob. Sollte laut Kapiteln am 15.11. stehen.*
 
-**3.1 Freigaben pro PR**
-- [ ] 0
-- [ ] 1 (ein anderes Teammitglied reviewt)
+Endpunkte für den Meilenstein (ankreuzen, was dazugehört):
+- [ ] Login / Logout
+- [ ] Aktueller Benutzer
+- [ ] Liste der Lerninhalte
+- [ ] Lernkarten eines Lerninhalts
+- [ ] Fällige Karten
+- [ ] Bewertung einer Karte abschicken
+- [ ] Weitere: ______________
 
-**3.2 Merge-Methode**
-- [ ] Nur Squash-Merge (ein Commit pro PR)
-- [ ] Alle Methoden erlaubt
+Fehlerformat:
+- [ ] Standardformat von Django REST Framework (`{"detail": "..."}` bzw. Fehler pro Feld)
+- [ ] Eigenes einheitliches Format: ______________
 
-**3.3 Branch nach dem Merge automatisch löschen**
+Wo wird der Vertrag abgelegt?
+- [ ] Automatisch erzeugtes OpenAPI-Schema (#15), Jakob erzeugt daraus die TypeScript-Typen (#23)
+- [ ] Zusätzlich eine kurze Doku im Repo
+
+Notizen: ____________________________________________
+
+---
+
+## #3 Algorithmus für Lernkarten
+*Zuständig: Luca, Jai, Abstimmung mit Jakob. Legt fest, wie viele Bewertungsbuttons das Frontend hat.*
+
+- [ ] **SM-2** für den Meilenstein (Bewertung 0–5), FSRS später prüfen (Empfehlung)
+- [ ] **FSRS** gleich von Anfang an (4 Stufen), Version: ______________
+
+Buttons im Frontend:
+- [ ] Alle 6 Stufen (0–5) als einzelne Buttons
+- [ ] Weniger Buttons, die auf SM-2-Werte abgebildet werden: ______________
+
+Notizen: ____________________________________________
+
+---
+
+## #4 Offene Punkte der Datenbankstruktur
+*Zuständig: Jai (Lead), Luca, Jakob. Danach: ER-Diagramm (#30, Jai) und Modelle (#11, Luca) anpassen.*
+
+Bekommen Testaufgaben auch einen Wiederholungsstatus?
 - [ ] Ja
-- [ ] Nein
+- [ ] Nein, nur Lernkarten
 
-**3.4 Issue mit PR verknüpfen**
-- [ ] In der PR-Beschreibung `Closes 5BHITS-2026-27-DA-LearnIT/Diplomarbeit#<nr>`
-- [ ] Issue wird von Hand geschlossen
+Lernergebnis:
+- [ ] Ein gemeinsames Modell für Lernkarte und Testaufgabe
+- [ ] Zwei getrennte Modelle
 
----
+Gamification-Daten (Punkte, Level, Abzeichen, Streak):
+- [ ] Werden im Backend gespeichert
+- [ ] Werden aus vorhandenen Daten berechnet
+- [ ] Vorerst keine Gamification
 
-## 4. Issues und Kanban-Board
+Was passiert, wenn ein Benutzer gelöscht wird?
+- [ ] Seine Daten werden mitgelöscht
+- [ ] Seine Daten werden anonymisiert
+- [ ] Erst nach Rücksprache mit Betreuern (#7)
 
-**4.1 Labels** (mehrere möglich)
-- [ ] Bereich: `backend`, `frontend`, `infrastruktur`, `doku`
-- [ ] Art: `bug`, `feature`
-- [ ] Priorität: `prio:hoch`, `prio:mittel`, `prio:niedrig`
-
-**4.2 Meilensteine** (z. B. 29.11.2026 „Startfähiges System“)
-- [ ] Als GitHub-Milestones anlegen
-- [ ] Nur in der Doku führen
-
-**4.3 Spalten im Kanban-Board**
-- [ ] Todo / In Progress / Done
-- [ ] Todo / In Progress / In Review / Done
-
-**4.4 Automatik im Board** (mehrere möglich)
-- [ ] Neue Issues automatisch ins Board
-- [ ] Geschlossene Issues und gemergte PRs automatisch auf „Done“
+Notizen: ____________________________________________
 
 ---
 
-## 5. Automatische Prüfungen (GitHub Actions)
+## #6 Ranglisten ja/nein (Datenschutz)
+*Zuständig: Jakob, Luca*
 
-- [ ] Backend-Tests und Frontend-Build bei jedem PR
-- [ ] Vorerst keine Actions
+- [ ] Keine Ranglisten (zumindest am Anfang)
+- [ ] Ranglisten nur mit Zustimmung der Schüler
+- [ ] Ranglisten ohne Namen (anonym)
 
----
-
-## 6. Commit-Nachrichten
-
-- [ ] Mit Issue-Nummer: `#12 Login-API angelegt`
-- [ ] Keine Vorgabe
+Notizen: ____________________________________________
 
 ---
 
-## 7. Offene Aufgaben
+## #7 Datenschutz-Fragen an Betreuer
+*Zuständig: Luca (Hauptverantwortlicher), alle*
+
+Fragen, die mitgenommen werden:
+- [ ] Wer ist Verantwortlicher im Sinne der DSGVO?
+- [ ] Auf welcher Rechtsgrundlage werden die Daten verarbeitet?
+- [ ] Wie lange werden die Daten aufbewahrt?
+- [ ] Löschen oder Anonymisieren von Benutzern (aus #4)
+- [ ] Ranglisten erlaubt? (aus #6)
+
+Termin mit Johannes Fischer / Franz Schweiberer:
+- [ ] Vereinbart am: ______________
+- [ ] Noch offen, macht: ______________
+
+Antworten: ____________________________________________
+
+---
+
+## #8 Einheitliche Begriffe im Dokument
+*Zuständig: alle*
+
+- [ ] „Benutzer“ / „Schüler“
+- [ ] „Benutzer:innen“ / „Lernende“
+- [ ] Andere Variante: ______________
+
+Notizen: ____________________________________________
+
+---
+
+## #1 Meilenstein 29.11.2026 „Startfähiges System“
+*Zuständig: alle. Nur Statuscheck, die Entscheidungen oben sind Voraussetzung.*
+
+- [ ] Wird bis 29.11. erreicht
+- [ ] Wird nicht erreicht, neuer Termin: ______________
+
+Was fehlt noch: ____________________________________________
+
+---
+
+## Aufgaben nach der Besprechung
 
 | Aufgabe | Zuständig | Bis |
 |---|---|---|
-| | | |
+| Entscheidungen als Kommentar in die Issues schreiben und Issues schließen | | |
 | | | |
 | | | |
